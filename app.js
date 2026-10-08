@@ -94,23 +94,11 @@ function buildHall() {
   hallBuilt = true;
   for (const t of C.thanks) $('thanks-text').append(Object.assign(document.createElement('p'), { textContent: t }));
   $('thanks-sign').textContent = C.signature;
-  $('hall-foot').textContent = C.footer;
 
-  if (C.thesis?.length) {
-    for (const t of C.thesis) $('thesis-text').append(Object.assign(document.createElement('p'), { textContent: t }));
-  } else $('thesis-section').hidden = true;
-
-  const grid = $('photos');
-  let left = C.photos.length;
-  const gone = () => { if (--left === 0) $('photos-section').hidden = true; };
-  if (!left) $('photos-section').hidden = true;
-  C.photos.forEach((p, i) => {
-    const fig = document.createElement('figure');
-    const img = Object.assign(new Image(), { src: p.src, alt: p.alt, decoding: 'async', loading: i === 0 ? 'eager' : 'lazy' });
-    img.addEventListener('error', () => { fig.remove(); gone(); });
-    fig.append(img);
-    grid.append(fig);
-  });
+  const img = $('photo');
+  img.addEventListener('error', () => { $('photo-section').hidden = true; });
+  Object.assign(img, { src: C.photo.src, alt: C.photo.alt });
+  $('photo-caption').textContent = C.photo.caption;
 
   if (!storageOk) {
     joinNote('Il browser non salva dati (navigazione privata?). Dopo aver chiesto l\'accesso non chiudere questa pagina.', true);

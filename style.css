@@ -89,22 +89,14 @@ h2{font-size:clamp(2rem,8vw,2.8rem);line-height:1.05;margin-bottom:1.25rem}
 .hero h1 span + span{padding-left:.9em}
 .degree{font-size:1.2rem;max-width:22rem}
 .year{font-family:var(--serif);font-weight:600;color:var(--laurel);font-size:1.4rem;margin-top:1.4rem}
-.scroll-hint{margin-top:2rem;color:var(--muted)}
 #hall section{padding:4rem 0;border-top:1px solid var(--line)}
 #hall section p + p{margin-top:1rem}
 .thanks p{font-family:var(--serif);font-size:1.3rem;line-height:1.55;font-weight:300}
 .thanks .sign{font-style:italic;margin-top:1.5rem;color:var(--laurel)}
-details.thesis summary{cursor:pointer;color:var(--gold);font-weight:700;min-height:44px;display:flex;align-items:center}
-details.thesis p{margin-top:1rem}
-
-.photos{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.photos figure{margin:0}
-.photos img{width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:3px;background:var(--ink-2)}
-.photos figure:first-child{grid-column:1 / -1}
-.photos figure:first-child img{aspect-ratio:4/3}
-
+.photo figure{margin:0}
+.photo img{display:block;width:100%;height:auto;border-radius:4px;background:var(--ink-2)}
+.photo figcaption{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(1.45rem,6vw,1.9rem);line-height:1.3;margin-top:1.5rem;color:var(--paper)}
 .join{padding-bottom:4rem!important}
-.hall-foot{padding:2.5rem 0 4rem;color:var(--muted);border-top:1px solid var(--line)}
 .join label{display:block;font-family:var(--serif);font-size:clamp(1.8rem,7vw,2.4rem);line-height:1.1;margin-bottom:1rem}
 .field{
   width:100%;font:inherit;font-size:1.25rem;color:var(--paper);background:var(--ink-2);
