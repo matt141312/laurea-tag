@@ -1,0 +1,12 @@
+name = "laurea-tag"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+# Origine del frontend su GitHub Pages (CORS). In più è sempre consentito http://localhost:*
+ALLOWED_ORIGIN = "https://matt141312.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "laurea"
+database_id = "248c3897-56fa-41c8-be29-0ace5e21ce34"

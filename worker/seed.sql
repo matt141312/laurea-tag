@@ -1,0 +1,33 @@
+-- Missioni. Per cambiarle: modifica il testo e riesegui (upsert per id).
+-- Non usare DELETE/INSERT OR REPLACE: gli ospiti referenziano le missioni (foreign key).
+INSERT INTO missions (id, text) VALUES
+  (1, 'Fai un brindisi in rima a Matteo che riguardi la sua tesi, il vostro rapporto e un ananas.'),
+  (2, 'Spiega a Matteo la sua tesi senza usare le parole “internet”, “5G” o “telefono”.'),
+  (3, 'Fai una foto con Matteo in cui entrambi state indicando qualcosa, ma senza dirgli cosa deve indicare.'),
+  (4, 'Convinci qualcuno a chiamare Matteo “Ingegnere” almeno 3 volte durante la serata.'),
+  (5, 'Fai partire un applauso per Matteo senza dire “applaudiamo Matteo” e senza essere tu il primo ad applaudire.'),
+  (6, 'Fai indovinare a qualcuno l''argomento della tesi di Matteo usando esclusivamente gesti.'),
+  (7, 'Trova 3 persone che abbiano conosciuto Matteo in periodi diversi della sua vita e fai raccontare a tutte e tre un ricordo su di lui.'),
+  (8, 'Convinci qualcuno a fare un brindisi usando la frase “alla propagazione” senza spiegargli prima perché deve dirla.'),
+  (9, 'Fai dire a Matteo una parola scelta dalla giuria senza pronunciarla tu e senza chiedergli direttamente di dirla.'),
+  (10, 'Fai raccontare a qualcuno la prima impressione che ha avuto di Matteo e poi convinci un''altra persona a raccontare la propria.'),
+  (11, 'Fai una foto di gruppo con almeno 5 persone, ma devi riuscire a farla proporre a qualcun altro.'),
+  (12, 'Convincere due persone a scambiarsi un complimento reciproco senza dire loro che è una missione.'),
+  (13, 'Fai raccontare a Matteo a qualcuno cosa ha fatto per la tesi, ma devi riuscire a far iniziare il discorso da Matteo.'),
+  (14, 'Durante una conversazione, inserisci naturalmente le parole “satellite”, “pizza” e “laurea” nella stessa frase senza che nessuno ti chieda perché le hai dette.'),
+  (15, 'Convinci qualcuno che “Digital Twin” sarebbe un ottimo nome per un cocktail e fagli proporre una ricetta.'),
+  (16, 'Fai dire a qualcuno: “Questa cosa è molto da ingegnere” senza usare tu la parola “ingegnere”.'),
+  (17, 'Trova qualcuno che non conosci benissimo e fatti raccontare una cosa che Matteo faceva spesso all''università. Non puoi chiedere direttamente “cosa faceva Matteo all''università?”.'),
+  (18, 'Fai pronunciare a 3 persone diverse la parola “antenna” durante conversazioni separate.'),
+  (19, 'Convinci qualcuno a fare una foto con Matteo usando una posa inventata da te, senza dirgli che l''hai inventata tu.'),
+  (20, 'Fai raccontare a Matteo a qualcuno il significato di “Digital Twin” senza pronunciare tu né “Digital Twin” né “tesi”.'),
+  (21, 'Riesci a far dire a Matteo “non è così semplice” durante una conversazione senza parlare di università, studio o lavoro.'),
+  (22, 'Convinci due persone che non stanno parlando tra loro a scoprire di avere qualcosa in comune. Non puoi presentarle esplicitamente.'),
+  (23, 'Fai fare a qualcuno un brindisi a Matteo utilizzando una metafora completamente assurda.'),
+  (24, 'Fai cantare almeno una frase di una canzone a una persona che non sta cantando, senza iniziare tu a cantare.'),
+  (25, 'Fai pronunciare a Matteo “finalmente” almeno due volte durante la serata, in due conversazioni diverse.'),
+  (26, 'Convincere qualcuno a spiegare a un''altra persona, con parole sue, cosa pensa che Matteo abbia studiato per diventare ingegnere delle telecomunicazioni.'),
+  (27, 'Fai in modo che almeno 4 persone dicano “Auguri Ingegnere!” contemporaneamente, senza dire direttamente a nessuno di farlo.'),
+  (28, 'Trova una persona che conosce Matteo da molto tempo e convincila a raccontare davanti ad almeno altre due persone un episodio che Matteo probabilmente preferirebbe non fosse raccontato.'),
+  (29, 'Missione finale: fai dire a Matteo “Questa è stata una bella idea” senza spiegargli mai che stai facendo una missione.')
+ON CONFLICT(id) DO UPDATE SET text = excluded.text;

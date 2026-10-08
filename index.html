@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f1b2d">
+<title>Matteo Passerini, laurea 2026</title>
+<meta property="og:title" content="Matteo Passerini, laurea 2026">
+<meta property="og:description" content="Laurea magistrale in Ingegneria delle Telecomunicazioni, Università di Bologna">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body class="locked">
+
+<div id="alert" role="alertdialog" aria-modal="true" aria-labelledby="al-title" aria-describedby="al-desc" hidden>
+  <div class="al-box">
+    <div class="al-head" id="al-title"><span class="dot" aria-hidden="true"></span>SECURITY ALERT</div>
+    <p class="al-msg" id="al-desc"><strong>Matteo Passerini</strong> is trying to infect your device.</p>
+    <dl class="al-meta">
+      <dt>Payload</dt><dd>gratitudine.exe</dd>
+      <dt>Vettore</dt><dd>NFC, 13,56 MHz</dd>
+      <dt>Rischio</dt><dd>commozione lieve</dd>
+    </dl>
+    <div class="al-btns">
+      <button id="deny" type="button">DENY</button>
+      <button id="allow" type="button">ALLOW</button>
+    </div>
+    <p id="deny-msg" role="status"></p>
+    <pre id="log" aria-live="polite"></pre>
+  </div>
+</div>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main>
+  <!-- caricamento iniziale -->
+  <div id="loading" class="screen center" aria-busy="true"><p class="muted">Ricerca segnale…</p></div>
+
+  <!-- errore bloccante (primo caricamento) -->
+  <div id="fatal" class="screen center" role="alert" hidden>
+    <p class="big">Niente segnale</p>
+    <p id="fatal-msg"></p>
+    <button class="btn" type="button" id="fatal-retry">Riprova</button>
+  </div>
+
+  <!-- 2. hall -->
+  <div id="hall" class="screen" hidden>
+    <header class="hero">
+      <h1><span>Matteo</span><span>Passerini</span></h1>
+      <p class="degree">Laurea magistrale in Ingegneria delle Telecomunicazioni</p>
+      <p class="muted">Alma Mater Studiorum, Università di Bologna</p>
+      <p class="year">2026</p>
+      <p class="scroll-hint">Scorri: c'è una cosa per te ↓</p>
+    </header>
+
+    <section class="thanks" aria-labelledby="h-grazie">
+      <h2 id="h-grazie">Grazie</h2>
+      <div id="thanks-text"></div>
+      <p class="sign" id="thanks-sign"></p>
+    </section>
+
+    <section id="photos-section" aria-labelledby="h-foto">
+      <h2 id="h-foto">Foto</h2>
+      <div class="photos" id="photos"></div>
+    </section>
+
+    <section id="thesis-section">
+      <details class="thesis">
+        <summary>Di cosa parla la tesi</summary>
+        <div id="thesis-text"></div>
+      </details>
+    </section>
+
+    <section class="join">
+      <form id="join-form" novalidate>
+        <label for="nick">Come ti chiama Matteo?</label>
+        <div id="join-note" class="note" role="alert" hidden></div>
+        <input id="nick" class="field" name="name" type="text" maxlength="30" autocomplete="nickname"
+               autocapitalize="words" enterkeyhint="send" required aria-describedby="nick-count">
+        <p class="counter" id="nick-count" aria-live="polite">0/30</p>
+        <button class="btn gold" type="submit" id="join-btn">Chiedi l'accesso</button>
+      </form>
+    </section>
+    <footer class="hall-foot" id="hall-foot"></footer>
+  </div>
+
+  <!-- 3. sala d'attesa -->
+  <div id="waiting" class="screen center" hidden>
+    <p class="kicker">Richiesta inviata</p>
+    <p class="nick" id="wait-nick"></p>
+    <div class="radar" id="radar" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <g>
+          <circle class="ring" cx="100" cy="100" r="96"/>
+          <circle class="ring" cx="100" cy="100" r="96"/>
+          <circle class="ring" cx="100" cy="100" r="96"/>
+        </g>
+        <g class="sat">
+          <rect x="52" y="90" width="30" height="20" rx="2" fill="#8fae7a" opacity=".85"/>
+          <rect x="118" y="90" width="30" height="20" rx="2" fill="#8fae7a" opacity=".85"/>
+          <line x1="82" y1="100" x2="118" y2="100" stroke="#e3c27a" stroke-width="3"/>
+          <rect x="88" y="86" width="24" height="28" rx="4" fill="#e3c27a"/>
+          <path d="M100 86 v-12 m-8 -4 q8 -8 16 0" fill="none" stroke="#e3c27a" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="lock">
+          <circle cx="100" cy="100" r="60" fill="none" stroke="#8fae7a" stroke-width="4"/>
+          <path d="M78 102 l15 15 l30 -32" fill="none" stroke="#8fae7a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+    <p class="status-line" id="wait-status" role="status">Matteo deve riconoscerti.</p>
+  </div>
+
+  <!-- 4. missione -->
+  <div id="mission" class="screen center" hidden>
+    <p class="welcome">Benvenuto, <span id="m-name"></span></p>
+    <div class="card">
+      <p class="kicker">La tua missione</p>
+      <p class="mission-text" id="m-text"></p>
+    </div>
+    <p class="done">La giuria verificherà dal vivo.<br>Ora puoi mettere via il telefono.</p>
+  </div>
+</main>
+
+<!-- 5. vincitore -->
+<div id="winner" role="dialog" aria-modal="true" aria-labelledby="w-title" hidden>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="inner">
+    <p class="kicker" id="w-title">Il vincitore è</p>
+    <p class="wname" id="w-name"></p>
+    <p class="sub">Stasera dirige gli scherzi.</p>
+    <div class="mine" id="w-mine" hidden>
+      <p>La tua missione</p>
+      <p id="w-mission"></p>
+    </div>
+    <button class="btn ghost" type="button" id="w-close" hidden>Chiudi</button>
+  </div>
+</div>
+
+<div id="banner" role="alert" hidden>
+  <span id="banner-msg"></span>
+  <button class="btn" type="button" id="banner-retry">Riprova</button>
+</div>
+</body>
+</html>

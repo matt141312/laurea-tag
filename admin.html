@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f1b2d">
+<title>Admin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="admin.js"></script>
+</head>
+<body class="admin">
+<main>
+  <!-- login -->
+  <div id="login" class="login" hidden>
+    <h1>Controllo missione</h1>
+    <p class="muted">Solo per Matteo (e chi ha la password).</p>
+    <form id="login-form">
+      <label class="sr-only" for="pw">Password</label>
+      <input id="pw" class="field" type="password" autocomplete="current-password" placeholder="Password" required>
+      <div id="login-err" class="note" role="alert" hidden></div>
+      <button class="btn gold" type="submit" id="login-btn">Entra</button>
+    </form>
+  </div>
+
+  <!-- pannello -->
+  <div id="panel" hidden>
+    <h1>Controllo missione</h1>
+    <div id="err" class="note" role="alert" hidden>
+      <span id="err-msg"></span><br>
+      <button class="btn" type="button" id="err-retry">Riprova</button>
+    </div>
+
+    <h2>In attesa <span class="count" id="n-pending">0</span></h2>
+    <div id="pending"></div>
+
+    <h2>Vincitore</h2>
+    <div class="winner-box">
+      <p class="current" id="w-current"></p>
+      <div class="row">
+        <label class="sr-only" for="w-select">Ospite</label>
+        <select id="w-select" class="field"></select>
+        <button class="btn gold" type="button" id="w-proclaim">Proclama</button>
+      </div>
+      <div class="row"><button class="btn danger" type="button" id="w-cancel" hidden>Annulla vincitore</button></div>
+    </div>
+
+    <h2>Accettati <span class="count" id="n-approved">0</span></h2>
+    <div id="approved"></div>
+
+    <h2>Rifiutati <span class="count" id="n-rejected">0</span></h2>
+    <div id="rejected"></div>
+
+    <p class="muted" style="margin-top:3rem"><button class="btn ghost" type="button" id="logout">Esci</button></p>
+  </div>
+</main>
+
+<!-- foglio: accetta / cambia missione -->
+<dialog id="sheet">
+  <form method="dialog" id="sheet-form">
+    <h3 id="sheet-title"></h3>
+    <div id="sheet-name-wrap">
+      <label for="sheet-name">Nome visualizzato</label>
+      <input id="sheet-name" class="field" maxlength="30" autocomplete="off">
+    </div>
+    <label for="sheet-mission">Missione</label>
+    <select id="sheet-mission" class="field"></select>
+    <p class="mpreview" id="sheet-preview"></p>
+    <p class="err" id="sheet-err" role="alert"></p>
+    <div class="row">
+      <button class="btn ghost" type="button" id="sheet-cancel">Annulla</button>
+      <button class="btn gold" type="submit" id="sheet-ok">Conferma</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- conferma -->
+<dialog id="confirm">
+  <form method="dialog">
+    <h3 id="confirm-title">Sei sicuro?</h3>
+    <p id="confirm-text"></p>
+    <p class="err" id="confirm-err" role="alert"></p>
+    <div class="row">
+      <button class="btn ghost" type="button" id="confirm-no">No</button>
+      <button class="btn gold" type="submit" id="confirm-yes">Sì</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
