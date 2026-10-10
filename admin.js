@@ -176,7 +176,14 @@ function preview() {
 }
 $('sheet-mission').addEventListener('change', preview);
 
+// Missioni in coppia (alleati segreti, vedi seed.sql): se una è assegnata, proponi subito l'altra.
+const PAIRS = [[26, 27], [30, 31]];
+
 function randomFree() {
+  for (const [a, b] of PAIRS) {
+    const ma = missionById(a), mb = missionById(b);
+    if (ma && mb && ma.assigned !== mb.assigned) return (ma.assigned ? mb : ma).id;
+  }
   const free = state.missions.filter((m) => !m.assigned);
   const pool = free.length ? free : state.missions;
   return pool[Math.floor(Math.random() * pool.length)]?.id;
